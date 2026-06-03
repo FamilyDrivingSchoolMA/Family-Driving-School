@@ -1005,10 +1005,15 @@
     @media (max-width: 768px) {
       .nav-links, .nav-phone { display: none; }
       .hamburger { display: flex; }
-      .hero-content { grid-template-columns: 1fr; padding: 6rem 1.5rem 4rem; gap: 3rem; }
-      .hero-photo-main img, .hero-photo-main video { height: 220px; }
-      .hero-photo-badge { bottom: -1rem; }
+      .hero-content { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 2.5rem; }
       .hero h1 { font-size: 2.4rem; }
+      .hero p { font-size: 1rem; }
+      .hero-trust { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-top: 2rem; padding-top: 1.5rem; }
+      .trust-item { font-size: .82rem; }
+      .hero-cta { flex-wrap: wrap; }
+      .hero-photo-main img, .hero-photo-main video { height: 220px; }
+      .hero-visual { margin-bottom: 2rem; }
+      .hero-photo-badge { bottom: -1rem; left: 50%; transform: translateX(-50%); white-space: nowrap; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .why-us-inner { grid-template-columns: 1fr; gap: 3rem; }
       .why-us-image { order: -1; }
@@ -1018,39 +1023,47 @@
     }
 
     @media (max-width: 480px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
-      .stat-number { font-size: 2rem; }
+      .hero-content { padding: 5.5rem 1.25rem 2.5rem; gap: 2rem; }
+      .hero h1 { font-size: 2rem; }
+      .hero p { font-size: .95rem; margin-bottom: 1.5rem; }
+      .hero-badge { font-size: .72rem; padding: .35rem .85rem; margin-bottom: 1rem; }
+      .hero-trust { grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: 1.5rem; padding-top: 1.25rem; }
+      .trust-item { font-size: .78rem; gap: .35rem; }
+      .hero-photo-main img, .hero-photo-main video { height: 200px; }
+      .hero-visual { margin-bottom: 2rem; }
+      .hero-photo-badge { padding: .65rem 1rem; gap: .65rem; }
+      .hero-photo-badge .badge-num { font-size: 1.3rem; }
+      .hero-photo-badge .badge-label { font-size: .65rem; }
       .hero-cta { flex-direction: column; }
       .hero-cta .btn { width: 100%; justify-content: center; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+      .stat-number { font-size: 2rem; }
       .cta-buttons { flex-direction: column; align-items: center; }
       .pricing-grid { max-width: 100%; }
-      .hero p { font-size: 1rem; }
-      .hero-trust { gap: 1rem; margin-top: 2rem; padding-top: 1.5rem; }
       .section-subtitle { font-size: .95rem; }
     }
 
-    @media (max-width: 430px) {
-      .hero-content { padding: 5rem 1.25rem 3rem; }
-      .hero h1 { font-size: 2.1rem; }
-      .hero p { font-size: .95rem; margin-bottom: 1.75rem; }
-      .hero-trust { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin-top: 1.75rem; padding-top: 1.25rem; }
-      .trust-item { font-size: .78rem; gap: .35rem; }
-      .hero-photo-main img, .hero-photo-main video { height: 190px; }
-      .hero-photo-badge { gap: .75rem; padding: .6rem .9rem; font-size: .78rem; }
+    @media (max-width: 390px) {
+      .hero-content { padding: 5rem 1rem 2rem; }
+      .hero h1 { font-size: 1.8rem; }
+      .hero p { font-size: .9rem; }
+      .hero-trust { gap: .6rem; }
+      .trust-item { font-size: .74rem; }
+      .hero-photo-main img, .hero-photo-main video { height: 180px; }
       .stats-bar { padding: 1.25rem 1rem; }
       .stat-number { font-size: 1.75rem; }
       .stat-label { font-size: .7rem; }
       .services-grid { gap: 1rem; }
-      .service-card { padding: 1.5rem 1.25rem; }
-      .pricing-card { padding: 1.75rem 1.25rem; }
-      .faq-question { font-size: .9rem; padding: 1rem 1.1rem; }
-      .team-card { padding: 2rem 1.25rem; }
-      .modal { padding: 1.5rem 1.1rem; }
+      .service-card { padding: 1.5rem 1rem; }
+      .pricing-card { padding: 1.5rem 1rem; }
+      .faq-question { font-size: .875rem; padding: .9rem 1rem; }
+      .modal { padding: 1.25rem 1rem; }
       .form-group input, .form-group select, .form-group textarea { font-size: .875rem; }
-      .policy-card { padding: 1.75rem 1.25rem; }
-      .cta-section { padding: 4rem 1.25rem; }
-      .section-title { font-size: 1.7rem; }
-      .section-subtitle { font-size: .9rem; }
+      .policy-card { padding: 1.5rem 1rem; }
+      .cta-section { padding: 3.5rem 1rem; }
+      .section-title { font-size: 1.6rem; }
+      .section-subtitle { font-size: .875rem; }
+      nav { padding: 1rem; }
     }
 
     /* ── TEAM ──────────────────────────────────────────── */
@@ -1268,12 +1281,23 @@
       background-repeat: no-repeat; background-position: right .8rem center;
       padding-right: 2.25rem; cursor: pointer;
     }
-    .radio-group { display: flex; gap: 1.25rem; flex-wrap: wrap; padding: .1rem 0; }
+    .radio-group { display: flex; gap: .65rem; flex-wrap: wrap; padding: .1rem 0; }
     .radio-label {
       display: flex; align-items: center; gap: .45rem;
       font-size: .9rem; color: var(--gray-700); font-weight: 500; cursor: pointer;
+      padding: .5rem 1rem;
+      border: 1.5px solid var(--gray-300);
+      border-radius: 100px;
+      transition: border-color .2s, background .2s, color .2s;
+      user-select: none;
     }
-    .radio-label input[type="radio"] { width: 17px; height: 17px; accent-color: var(--navy); cursor: pointer; }
+    .radio-label.selected {
+      border-color: var(--navy);
+      background: rgba(12,31,63,.07);
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .radio-label input[type="radio"] { display: none; }
     .form-nav {
       display: flex; justify-content: space-between; align-items: center;
       margin-top: 1.75rem; padding-top: 1.5rem;
@@ -2384,6 +2408,8 @@
       document.getElementById('permitNumberGroup').style.display = r.value === 'Yes' ? '' : 'none';
       document.getElementById('permitRadioGroup').style.outline = '';
       document.getElementById('permitRadioGroup').style.padding = '';
+      document.querySelectorAll('#permitRadioGroup .radio-label').forEach(l => l.classList.remove('selected'));
+      r.closest('.radio-label').classList.add('selected');
     });
   });
 
