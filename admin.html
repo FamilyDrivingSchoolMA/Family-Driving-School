@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Family Driving School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0C1F3F; --navy-mid: #1B3A66; --gold: #C9A84C;
+      --gray-200: #E5E7EB; --gray-500: #6B7280; --radius: 10px;
+    }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+
+    .card { background: #fff; border-radius: 16px; padding: 2.5rem 2rem; width: 100%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+
+    .card-logo { display: flex; align-items: center; gap: .75rem; margin-bottom: 2rem; }
+    .card-logo img { height: 38px; background: var(--navy); border-radius: 8px; padding: 4px 7px; }
+    .card-logo-text { font-size: .85rem; font-weight: 700; color: var(--navy); line-height: 1.2; }
+    .card-logo-text span { display: block; font-size: .68rem; font-weight: 600; color: var(--gray-500); text-transform: uppercase; letter-spacing: .08em; }
+
+    h1 { font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: .35rem; }
+    .subtitle { font-size: .875rem; color: var(--gray-500); margin-bottom: 2rem; line-height: 1.5; }
+
+    #loginScreen {}
+    #adminScreen { display: none; }
+
+    .section-label { font-size: .72rem; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: .1em; margin: 0 0 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--gray-200); }
+
+    .form-group { margin-bottom: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; }
+    label { display: block; font-size: .78rem; font-weight: 600; color: var(--navy); margin-bottom: .4rem; text-transform: uppercase; letter-spacing: .05em; }
+    input[type="text"], input[type="password"], input[type="date"], input[type="time"] {
+      width: 100%; padding: .7rem .9rem; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+      font-family: inherit; font-size: .9rem; color: var(--navy);
+      transition: border-color .2s, box-shadow .2s; outline: none;
+    }
+    input:focus { border-color: var(--navy); box-shadow: 0 0 0 3px rgba(12,31,63,.1); }
+
+    .btn { width: 100%; padding: .85rem; border: none; border-radius: var(--radius); font-family: inherit; font-size: .95rem; font-weight: 700; cursor: pointer; transition: all .2s; margin-top: .25rem; }
+    .btn-primary { background: var(--navy); color: #fff; }
+    .btn-primary:hover { background: var(--navy-mid); }
+    .btn-primary:disabled { opacity: .6; cursor: not-allowed; }
+
+    .error-msg { font-size: .825rem; color: #e53e3e; margin-top: .5rem; display: none; }
+    .success-msg { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: var(--radius); padding: .85rem 1rem; font-size: .875rem; color: #166534; font-weight: 600; margin-top: 1rem; display: none; text-align: center; }
+
+    .logout-btn { background: none; border: none; font-family: inherit; font-size: .8rem; color: var(--gray-500); cursor: pointer; margin-top: 1.5rem; display: block; margin-left: auto; }
+    .logout-btn:hover { color: var(--navy); }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-logo">
+    <img src="images/logo.png" alt="Logo" />
+    <div class="card-logo-text">
+      Family Driving School
+      <span>Admin Panel</span>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginScreen">
+    <h1>Staff Login</h1>
+    <p class="subtitle">Enter your admin password to access the control panel.</p>
+    <div class="form-group">
+      <label for="passwordInput">Password</label>
+      <input type="password" id="passwordInput" placeholder="Enter password" autocomplete="current-password" />
+      <p class="error-msg" id="loginError">Incorrect password. Please try again.</p>
+    </div>
+    <button class="btn btn-primary" id="loginBtn">Sign In</button>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="adminScreen">
+    <h1>Update Schedule</h1>
+    <p class="subtitle">Set the dates for the next accelerated classroom week. Changes go live on the website immediately.</p>
+
+    <p class="section-label">Accelerated Week</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" />
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" />
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="startTime">Start Time</label>
+        <input type="time" id="startTime" value="08:00" />
+      </div>
+      <div class="form-group">
+        <label for="endTime">End Time</label>
+        <input type="time" id="endTime" value="14:30" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" value="102 Main St, Brockton, MA 02301" />
+    </div>
+
+    <button class="btn btn-primary" id="saveBtn">Save Changes</button>
+    <div class="success-msg" id="successMsg">Schedule updated! The website will reflect the change shortly.</div>
+
+    <button class="logout-btn" id="logoutBtn">Sign out</button>
+  </div>
+</div>
+
+<script>
+  const SHEETS_URL     = 'https://script.google.com/macros/s/AKfycbz7Y4yQbLZo0iqTG43WQpQazd3GOD8LYVWH1-rBc8fWTzBNw-1HRUi_AR01JBXo6V2t/exec';
+  const ADMIN_PASSWORD = 'Amarikeith#15';
+
+  const loginScreen   = document.getElementById('loginScreen');
+  const adminScreen   = document.getElementById('adminScreen');
+  const passwordInput = document.getElementById('passwordInput');
+
+  if (sessionStorage.getItem('fds_admin') === '1') showAdmin();
+
+  document.getElementById('loginBtn').addEventListener('click', attemptLogin);
+  passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); });
+
+  function attemptLogin() {
+    if (passwordInput.value === ADMIN_PASSWORD) {
+      sessionStorage.setItem('fds_admin', '1');
+      document.getElementById('loginError').style.display = 'none';
+      showAdmin();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+      passwordInput.value = '';
+      passwordInput.focus();
+    }
+  }
+
+  function showAdmin() {
+    loginScreen.style.display = 'none';
+    adminScreen.style.display = 'block';
+    // Pre-fill location from current config
+    fetch(SHEETS_URL)
+      .then(r => r.json())
+      .then(cfg => {
+        if (cfg.accelLocation) document.getElementById('location').value = cfg.accelLocation;
+      })
+      .catch(() => {});
+  }
+
+  document.getElementById('saveBtn').addEventListener('click', async () => {
+    const start = document.getElementById('startDate').value;
+    const end   = document.getElementById('endDate').value;
+    const t1    = document.getElementById('startTime').value;
+    const t2    = document.getElementById('endTime').value;
+    const loc   = document.getElementById('location').value.trim();
+
+    if (!start || !end) { alert('Please select both a start and end date.'); return; }
+
+    const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+    const fmtTime = t => {
+      const [h, m] = t.split(':');
+      const hr = +h, suffix = hr >= 12 ? 'pm' : 'am';
+      return ((hr % 12) || 12) + (m !== '00' ? ':' + m : '') + suffix;
+    };
+    const accelDate = `${fmt(start)}–${fmt(end)} • ${fmtTime(t1)}–${fmtTime(t2)}`;
+
+    const btn = document.getElementById('saveBtn');
+    const msg = document.getElementById('successMsg');
+    btn.disabled = true;
+    btn.textContent = 'Saving…';
+    msg.style.display = 'none';
+
+    const params = new URLSearchParams({ action: 'updateConfig', accelDate, accelLocation: loc });
+    try {
+      await fetch(SHEETS_URL, { method: 'POST', mode: 'no-cors', body: params });
+      msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 4000);
+    } catch {
+      alert('Something went wrong. Please try again.');
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Save Changes';
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    sessionStorage.removeItem('fds_admin');
+    adminScreen.style.display = 'none';
+    loginScreen.style.display = 'block';
+    passwordInput.value = '';
+  });
+</script>
+</body>
+</html>
